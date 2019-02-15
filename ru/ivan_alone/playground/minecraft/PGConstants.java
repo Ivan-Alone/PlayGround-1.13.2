@@ -43,7 +43,7 @@ public class PGConstants {
     public static final String pgModInfoFilename = "/riftmod.json";
     
 	public static String getPGBuildVersion() {
-		return "#1";
+		return "#2";
 	}
 
 	public static String getPGBuildInfo() {

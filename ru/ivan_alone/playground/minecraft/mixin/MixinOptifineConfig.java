@@ -1,6 +1,9 @@
 package ru.ivan_alone.playground.minecraft.mixin;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -35,9 +38,12 @@ public class MixinOptifineConfig {
                 list.add(iresourcepack);
             }
         }
-        
 		String path = new File(PGConstants.class.getResource(PGConstants.pgModInfoFilename).getFile()).getParent();
-		
+
+        try {
+        	path = URLDecoder.decode(path, StandardCharsets.UTF_8.name());
+		} catch (UnsupportedEncodingException e) { }
+        
 		if (path.charAt(path.length()-1) == '!') {
 			path = path.substring(0, path.length()-1);
 		}
