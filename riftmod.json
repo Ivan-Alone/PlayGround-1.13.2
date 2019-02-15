@@ -1,0 +1,12 @@
+{
+  
+	"id": "playground_minecraft",
+	"name": "PlayGround Minecraft",
+	"authors": [ 
+		"Ivan_Alone"
+	],
+	"listeners": [
+		"ru.ivan_alone.playground.minecraft.Client"
+	]
+
+}
