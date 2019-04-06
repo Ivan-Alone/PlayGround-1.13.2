@@ -4,7 +4,7 @@
   "compatibilityLevel": "JAVA_8",
   "target": "@env(DEFAULT)",
   "package": "ru.ivan_alone.playground.minecraft.mixin",
-  "refmap": "mixins.playground_minecraft.refmap.json",
+  "refmap": "mixins.playground_minecraft.dev.refmap.json",
   "mixins": [
   ],
   "client": [
@@ -19,13 +19,6 @@
 	"MixinGuiOptions",
 	"MixinGuiIngameMenu",
 	"MixinGuiOverlayDebug",
-	"MixinNetworkManager",
-	"MixinOptifineGuiVideoSettings",
-	"MixinOptifineVersionKiller",
-	"MixinOptifineTextureManager",
-	"MixinOptifineCapeUtils",
-	"MixinOptifineCapeImageBuffer",
-	"MixinOptifineLayerElytra",
-	"MixinOptifineConfig"
+	"MixinNetworkManager"
   ]
 }
