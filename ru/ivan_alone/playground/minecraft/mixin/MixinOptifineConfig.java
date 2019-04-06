@@ -25,8 +25,7 @@ public class MixinOptifineConfig {
 	 * @author Ivan_Alone
 	 */
 	@Overwrite(remap = false)
-    public static IResourcePack[] getResourcePacks()
-    {
+    public static IResourcePack[] getResourcePacks() {
         ResourcePackList<ResourcePackInfoClient> resourcepacklist = Minecraft.getInstance().getResourcePackList();
         Collection<ResourcePackInfoClient> collection = resourcepacklist.getPackInfos();
         List<IResourcePack> list = new ArrayList<IResourcePack>();

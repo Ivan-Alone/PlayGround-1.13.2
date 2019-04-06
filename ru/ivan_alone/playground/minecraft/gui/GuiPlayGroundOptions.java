@@ -29,7 +29,7 @@ public class GuiPlayGroundOptions extends GuiScreen implements IConfigStringRece
 		for (String key : PGConfig.getConfig().getConfigKeys()) {
 			String text = PG_Prefix+key;
 			boolean isHidden = PGConfig.getConfig().getNode(key).isHidden();
-			GuiButton button = new GuiButton(text.hashCode(), width / 2 + (i % 2 == 0 ? -155 : 5), height / 6 + (24 * (int)(i / 2)) - 6, 150, 20, I18n.format(text, new Object[0]) + (isHidden ? "" : ": " + PGConfig.getConfig().getValue(key))) {
+			GuiButton button = new GuiPGButton(text.hashCode(), width / 2 + (i % 2 == 0 ? -155 : 5), height / 6 + (24 * (int)(i / 2)) - 6, 150, 20, I18n.format(text, new Object[0]) + (isHidden ? "" : ": " + PGConfig.getConfig().getValue(key)), PGConfig.getConfig().getNode(key).getColor()) {
 				public void onClick(double p_onClick_1_, double p_onClick_3_) {
 					switch (PGConfig.getConfig().getType(key)) {
 						case BOOLEAN:

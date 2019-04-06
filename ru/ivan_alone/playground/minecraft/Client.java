@@ -9,13 +9,13 @@ public class Client implements InitializationListener {
 	@Override
 	public void onInitialization() {
 		MixinBootstrap.init();
-		boolean optifine = true;
+		boolean isDevWorkspace = true;
 		try {
-			Class.forName("net.optifine.ClearWater");
+			Class.forName("net.minecraft.client.gui.Gui");
 		} catch (Exception e) {
-			optifine = false;
+			isDevWorkspace = false;
 		}
-		if (optifine) {
+		if (!isDevWorkspace) {
 			Mixins.addConfiguration("mixins.playground_minecraft.json");
 		} else {
 			Mixins.addConfiguration("mixins.playground_minecraft.dev.json");

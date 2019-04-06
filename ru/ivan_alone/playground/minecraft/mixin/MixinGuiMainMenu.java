@@ -79,7 +79,10 @@ public class MixinGuiMainMenu extends GuiScreen {
 		MenuStorage storage = new MenuStorage(new Random().nextInt());
 		PGRegistry.OLDUR_TRAVERCE_TIME.put(menu, storage);
     	storage.hasSiteAnswer = false;
-		new Thread(new PGNotificationServiceResolver(storage)).start();
+    	
+    	if (!PGConstants.isSiteDown()) {
+    		new Thread(new PGNotificationServiceResolver(storage)).start();
+    	}
 	}
 
 	@Inject(method = "mouseClicked", at = @At("HEAD"), cancellable = true)
@@ -162,6 +165,7 @@ public class MixinGuiMainMenu extends GuiScreen {
 		
 		this.addButton((GuiButton) new GuiButton(14, this.width / 2 - 100, lvt_3_1_ + lvt_3_2_ * 2, I18n.format("pg.menu.pgprefix", new Object[0]) + I18n.format("menupg.joinpg", new Object[0])) {
 			public void onClick(final double p_onClick_1_, final double p_onClick_3_) {
+				PGConstants.joinedFromMainMenu = true;
 				Minecraft.getInstance().displayGuiScreen(new GuiConnecting(__this__, mc, pg));
 			}
 		});

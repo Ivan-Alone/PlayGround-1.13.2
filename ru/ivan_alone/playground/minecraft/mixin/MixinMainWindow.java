@@ -18,13 +18,16 @@ public class MixinMainWindow {
 	private Monitor monitor;
 
 	/** 
-	 * @reason Safe setup PlayGround Minecraft window title 
+	 * @reason Safe setup PlayGround Minecraft window title, checking is MC PG Site down 
 	 * @author Ivan_Alone
 	 */
 	@Overwrite
 	private void setMonitorFromVirtualScreen() {
 		MainWindow __this__ = (MainWindow)(Object)this;
 		GLFW.glfwSetWindowTitle(__this__.getHandle(), (CharSequence)PGConstants.getWindowTitle());
+		
+		PGConstants.runDownDetector();
+		
 		this.monitor = virtualScreen.getMonitor(__this__);
 	}
 }

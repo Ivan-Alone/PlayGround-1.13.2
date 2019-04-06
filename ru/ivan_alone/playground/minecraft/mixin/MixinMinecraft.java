@@ -12,8 +12,7 @@ public class MixinMinecraft {
 	 * @author Ivan_Alone
 	 */
 	@Overwrite
-	public String getVersionType()
-	{
+	public String getVersionType() {
 		return "PlayGround Minecraft / Rift ML";
 	}
 }

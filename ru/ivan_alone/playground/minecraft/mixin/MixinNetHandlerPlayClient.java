@@ -23,7 +23,7 @@ public class MixinNetHandlerPlayClient {
 	public void handleJoinGame(SPacketJoinGame packetIn, CallbackInfo ci) {
 		String password = PGConfig.getConfig().getValue("c.authme.password").trim();
 		
-		if (this.netManager.getRemoteAddress().toString().startsWith(PGConstants.playGroundAddressIP.split(":")[0])) {
+		if (PGConstants.isPlayerOnPG(netManager)) {
 			if (!password.equals("")) {
 				LogManager.getLogger().info("Permitted autologin in PlayGround Minecraft");
 				Minecraft.getInstance().player.sendChatMessage("/login " + password);

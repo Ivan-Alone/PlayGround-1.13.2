@@ -6,6 +6,8 @@ import java.io.InputStream;
 import java.io.Writer;
 import java.lang.annotation.Retention;
 import java.lang.reflect.Method;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.nio.Buffer;
 
 import org.apache.commons.io.IOUtils;
@@ -14,6 +16,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.util.ResourceLocation;
 import ru.ivan_alone.playground.minecraft.armorstatushud.HUDConfig;
 import ru.ivan_alone.playground.minecraft.config.PGConfig;
@@ -21,7 +24,11 @@ import ru.ivan_alone.playground.minecraft.config.PGConfig;
 public class PGConstants {
 	private PGConstants() {
 	}
-
+	
+	public static boolean joinedFromMainMenu = false;
+	
+	private static boolean siteDown = true;
+	
 	private static String buildTime = null;
 	private static Object nCache = null;
 
@@ -43,7 +50,38 @@ public class PGConstants {
     public static final String pgModInfoFilename = "/riftmod.json";
     
 	public static String getPGBuildVersion() {
-		return "#2";
+		return "#5";
+	}
+
+	public static void runDownDetector() {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				HttpURLConnection httpurlconnection = null;
+	
+				try {
+					int timeout = 2000;
+					long time = System.currentTimeMillis();
+					httpurlconnection = (HttpURLConnection) (new URL(PGConstants.notificationService)).openConnection(Minecraft.getInstance().getProxy());
+					httpurlconnection.setConnectTimeout(timeout + 500);
+					httpurlconnection.setDoInput(true);
+					httpurlconnection.setDoOutput(false);
+					httpurlconnection.connect();
+					if (time + timeout > System.currentTimeMillis()) {
+						PGConstants.siteDown = false;
+					}
+				} catch (Exception e) {
+				} finally {
+					if (httpurlconnection != null) {
+						httpurlconnection.disconnect();
+					}
+				}
+			}
+		}).start();
+	}
+
+	public static boolean isSiteDown() {
+		return PGConstants.siteDown;
 	}
 
 	public static String getPGBuildInfo() {
@@ -131,5 +169,9 @@ public class PGConstants {
 		public String toString() {
 			return build;
 		}
+	}
+
+	public static boolean isPlayerOnPG(NetworkManager netManager) {
+		return netManager.getRemoteAddress().toString().startsWith(PGConstants.playGroundAddressIP.split(":")[0]);
 	}
 }

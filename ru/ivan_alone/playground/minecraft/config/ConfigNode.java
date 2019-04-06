@@ -1,19 +1,42 @@
 package ru.ivan_alone.playground.minecraft.config;
 
+import ru.ivan_alone.playground.minecraft.util.GuiPGButtonTextColor;
+
 public class ConfigNode {
 	private String key;
 	private String value;
+	private GuiPGButtonTextColor color;
 	private ConfigNodeType type;
 	private int[] range;
 	private String dependsFrom;
 	private boolean hiddenValue = false;
+	
+	public ConfigNode(String key, String value, ConfigNodeType type, GuiPGButtonTextColor color) {
+		this(key, value, type, "", color);
+	}
+	
+	public ConfigNode(String key, String value, ConfigNodeType type, String dependsFrom, GuiPGButtonTextColor color) {
+		this(key, value, type, new int[] {0, 1}, dependsFrom, color);
+	}
+	
+	public ConfigNode(String key, String value, String type, GuiPGButtonTextColor color) {
+		this(key, value, type, "", color);
+	}
+	
+	public ConfigNode(String key, String value, String type, String dependsFrom, GuiPGButtonTextColor color) {
+		this(key, value, ConfigNodeType.valueOf(type == null ? ConfigNodeType.STRING.name() : type), new int[] {0, 1}, dependsFrom, color);
+	}
+	
+	public ConfigNode(String key, String value, ConfigNodeType type, int[] range, GuiPGButtonTextColor color) {
+		this(key, value, type, range, "", color);
+	}
 	
 	public ConfigNode(String key, String value, ConfigNodeType type) {
 		this(key, value, type, "");
 	}
 	
 	public ConfigNode(String key, String value, ConfigNodeType type, String dependsFrom) {
-		this(key, value, type, new int[] {0, 1}, dependsFrom);
+		this(key, value, type, new int[] {0, 1}, dependsFrom, null);
 	}
 	
 	public ConfigNode(String key, String value, String type) {
@@ -21,17 +44,18 @@ public class ConfigNode {
 	}
 	
 	public ConfigNode(String key, String value, String type, String dependsFrom) {
-		this(key, value, ConfigNodeType.valueOf(type == null ? ConfigNodeType.STRING.name() : type), new int[] {0, 1}, dependsFrom);
+		this(key, value, ConfigNodeType.valueOf(type == null ? ConfigNodeType.STRING.name() : type), new int[] {0, 1}, dependsFrom, null);
 	}
 	
 	public ConfigNode(String key, String value, ConfigNodeType type, int[] range) {
-		this(key, value, type, range, "");
+		this(key, value, type, range, "", null);
 	}
 	
-	public ConfigNode(String key, String value, ConfigNodeType type, int[] range, String dependsFrom) {
+	public ConfigNode(String key, String value, ConfigNodeType type, int[] range, String dependsFrom, GuiPGButtonTextColor color) {
 		this.key = key;
 		this.type = type;
 		this.dependsFrom = dependsFrom;
+		this.color = color;
 		switch(this.type) {
 			default:
 			case BOOLEAN:
@@ -93,5 +117,13 @@ public class ConfigNode {
 	
 	public boolean isHidden() {
 		return this.hiddenValue;
+	}
+
+	public GuiPGButtonTextColor getColor() {
+		return this.color == null ? new GuiPGButtonTextColor() : this.color;
+	}
+
+	public void setColor(GuiPGButtonTextColor color2) {
+		this.color = color2;
 	}
 }

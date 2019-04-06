@@ -18,6 +18,7 @@ import net.minecraft.client.renderer.texture.ThreadDownloadImageData;
 import net.minecraft.util.ResourceLocation;
 import net.optifine.player.CapeImageBuffer;
 import net.optifine.player.CapeUtils;
+import ru.ivan_alone.playground.minecraft.PGConstants;
 import ru.ivan_alone.playground.minecraft.util.PGRegistry;
 import ru.ivan_alone.playground.minecraft.util.ReflectMirror;
 
@@ -38,25 +39,25 @@ public class MixinOptifineCapeUtils {
 			String pgCapeUrl = "http://mc-playground.com/Launcher/PGCapes/" + username + ".png";
 			String ofCapeUrl = "http://s.optifine.net/capes/" + username + ".png";
 
-			HttpURLConnection httpurlconnection = null;
-
-			try {
-				httpurlconnection = (HttpURLConnection) (new URL(pgCapeUrl))
-						.openConnection(Minecraft.getInstance().getProxy());
-				httpurlconnection.setDoInput(true);
-				httpurlconnection.setDoOutput(false);
-				httpurlconnection.connect();
-				int mptHash = httpurlconnection.getResponseCode();
-				if (mptHash >= 200 && mptHash < 400) {
-					ofCapeUrl = pgCapeUrl;
+			if (!PGConstants.isSiteDown()) {
+				HttpURLConnection httpurlconnection = null;
+	
+				try {
+					httpurlconnection = (HttpURLConnection) (new URL(pgCapeUrl)).openConnection(Minecraft.getInstance().getProxy());
+					httpurlconnection.setDoInput(true);
+					httpurlconnection.setDoOutput(false);
+					httpurlconnection.connect();
+					int mptHash = httpurlconnection.getResponseCode();
+					if (mptHash >= 200 && mptHash < 400) {
+						ofCapeUrl = pgCapeUrl;
+					}
+				} catch (Exception var13) {
+					;
+				} finally {
+					if (httpurlconnection != null) {
+						httpurlconnection.disconnect();
+					}
 				}
-			} catch (Exception var13) {
-				;
-			} finally {
-				if (httpurlconnection != null) {
-					httpurlconnection.disconnect();
-				}
-
 			}
 			final boolean addElytra = ofCapeUrl.equals(pgCapeUrl);
             String s2 = FilenameUtils.getBaseName(ofCapeUrl);

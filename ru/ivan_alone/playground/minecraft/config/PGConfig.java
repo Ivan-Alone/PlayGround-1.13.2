@@ -17,6 +17,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.util.text.TextFormatting;
+import ru.ivan_alone.playground.minecraft.util.GuiPGButtonTextColor;
 
 public class PGConfig {
 	private static PGConfig instance = null;
@@ -29,13 +31,20 @@ public class PGConfig {
 	private static final ConfigNode[] DEFAULT_CONFIG = new ConfigNode[] {
 		new ConfigNode("a.debug.pgactive", "1", ConfigNodeType.BOOLEAN),
 		new ConfigNode("a.debug.pgadvance", "0", ConfigNodeType.BOOLEAN, "a.debug.pgactive"),
-		new ConfigNode("b.armorstatushud.enabled", "1", ConfigNodeType.BOOLEAN),
-		new ConfigNode("b.armorstatushud.location", "2", ConfigNodeType.RANGE, new int[] {0, 3}, "b.armorstatushud.enabled"),
-		new ConfigNode("b.armorstatushud.remained", "1", ConfigNodeType.BOOLEAN, "b.armorstatushud.enabled"),
+		new ConfigNode("a.misc.oldexpcreative", "0", ConfigNodeType.BOOLEAN),
 		new ConfigNode("a.misc.potionsduration", "1", ConfigNodeType.BOOLEAN),
 		new ConfigNode("a.popenchant.enabled", "1", ConfigNodeType.BOOLEAN),
-		new ConfigNode("a.misc.oldexpcreative", "0", ConfigNodeType.BOOLEAN),
 		new ConfigNode("a.popenchant.showall", "0", ConfigNodeType.BOOLEAN, "a.popenchant.enabled"),
+		new ConfigNode("a.tablist.showheads", "1", ConfigNodeType.BOOLEAN),
+		new ConfigNode("a.tablist.showheads.nonpg", "0", ConfigNodeType.BOOLEAN, "a.tablist.showheads", new GuiPGButtonTextColor() {
+			@Override
+			protected void init() {
+				this.setHoveredColor(TextFormatting.RED);
+			}
+		}),
+		new ConfigNode("b.armorstatushud.enabled", "1", ConfigNodeType.BOOLEAN),
+		new ConfigNode("b.armorstatushud.location", "2", ConfigNodeType.RANGE, new int[] {0, 3}, "b.armorstatushud.enabled", null),
+		new ConfigNode("b.armorstatushud.remained", "1", ConfigNodeType.BOOLEAN, "b.armorstatushud.enabled"),
 		new ConfigNode("c.authme.password", "", ConfigNodeType.STRING)
 	};
 	
@@ -72,6 +81,9 @@ public class PGConfig {
 			}
 			
 			ConfigNode node = this.config.get(var.getKey());
+			
+			node.setColor(var.getColor());
+			
 			if (node.getType() != var.getType()) {
 				node.setType(var.getType());
 			}
