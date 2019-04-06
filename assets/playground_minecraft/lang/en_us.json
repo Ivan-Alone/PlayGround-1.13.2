@@ -139,5 +139,7 @@
 	"pg.a.misc.oldexpcreative" : "Render ExpLvl in Creative",
 	"pg.a.misc.potionsduration" : "Show Potion's Duration",
 	"pg.a.popenchant.enabled" : "Enable PopEnchant",
-	"pg.a.popenchant.showall" : "Show All Enchants"
+	"pg.a.popenchant.showall" : "Show All Enchants",
+	"pg.a.tablist.showheads" : "Show heads in \u21B9-List",
+	"pg.a.tablist.showheads.nonpg" : "Heads on non-PG Servers"
 }

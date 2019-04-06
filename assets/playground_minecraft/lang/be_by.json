@@ -137,5 +137,7 @@
 	"pg.a.misc.oldexpcreative" : "Ўкл. Exp у Творчасці",
 	"pg.a.misc.potionsduration" : "Час дзеяння зелляў",
 	"pg.a.popenchant.enabled" : "Ўкл. PopEnchant",
-	"pg.a.popenchant.showall" : "Паказ. чары на ўсім"
+	"pg.a.popenchant.showall" : "Паказ. чары на ўсім",
+	"pg.a.tablist.showheads" : "Паказ. галавы у \u21B9-меню",
+	"pg.a.tablist.showheads.nonpg" : "Головы на інш. серверах"
 }
