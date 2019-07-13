@@ -121,7 +121,7 @@ public class PGConstants {
 	 * @reason Too obfuscated method, good luck have fun
 	 * @author Ivan_Alone
 	 */
-	public static String obfuscated() {
+	public static String obfuscated() { 
 		if (PGConstants.nCache == null) {
 			byte[] a = new byte[] { 46, 95, 92, 110, 105 };
 			Object b = Object.class.cast(PGConstants.class.getName().split(new String(new byte[] { a[2], a[0] }))[1]);
