@@ -39,7 +39,7 @@ public class PGConstants {
     public static final String notificationService = "http://mc-playground.com/Launcher/Clients/NotificationService.php";
 
 	public static final String playGroundServerName = "PlayGround Minecraft Survival 1.13";
-    public static final String playGroundAddressIP = "212.42.38.93:25565";
+    public static final String playGroundAddressIP = "minecraft.playground.ru:25565";
 
     public static final String playGroundLinkForum = "http://forums.playground.ru/minecraft/";
     public static final String playGroundLinkRules = "http://mc-playground.com/rules.html";
